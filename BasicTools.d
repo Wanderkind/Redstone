@@ -80,10 +80,10 @@ bool[8] Int8Sub(bool[8] a, bool[8] b){
     foreach(i;0..8){
         
         q = XOR(k, b[i]);
-        p = AND(k, b[i]);
+        p = NAND(k, b[i]);
         c = IMPLY(q, a[i]);
         sub[i] = XOR(a[i], q);
-        k = OR(NOT(c), p); // XOR also works
+        k = NAND(c, p);
     }
 
     return sub;
@@ -142,3 +142,5 @@ void main(){
     writeln(Int8Sub(c, d)); // 5
     writeln(Int8Mul(c, d)); // 28386 % 256 = 226
 }
+
+// for python:  f=lambda x:bin(x%256)[2:].zfill(8)[::-1]
