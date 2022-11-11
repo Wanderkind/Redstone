@@ -69,6 +69,26 @@ bool[8] Int8Add(bool[8] a, bool[8] b){
     return sum;
 }
 
+bool[8] Int8Sub(bool[8] a, bool[8] b){
+    
+    bool k = false;
+    bool p;
+    bool q;
+    bool c;
+    bool[8] sub;
+
+    foreach(i;0..8){
+        
+        q = XOR(k, b[i]);
+        p = AND(k, b[i]);
+        c = IMPLY(q, a[i]);
+        sub[i] = XOR(a[i], q);
+        k = OR(NOT(c), p); // XOR also works
+    }
+
+    return sub;
+}
+
 bool[8] Int8Mul(bool[8] a, bool[8] b){
     
     bool k;
@@ -86,7 +106,6 @@ bool[8] Int8Mul(bool[8] a, bool[8] b){
 
             foreach(j;i..8){
                 
-    
                 q = XOR(w[j], mul[j]);
                 p = AND(w[j], mul[j]);
                 c = AND(k, q);
@@ -98,7 +117,7 @@ bool[8] Int8Mul(bool[8] a, bool[8] b){
         foreach_reverse(j;i+1..8){
             w[j] = w[j-1];
         }
-        
+
         w[i]=0;
     }
 
@@ -114,15 +133,12 @@ void main(){
     bool[8] a = [1,0,1,0,0,0,0,0]; // 5
     bool[8] b = [1,0,0,0,1,0,0,0]; // 17
     writeln(Int8Add(a, b)); // 22
+    writeln(Int8Sub(a, b)); // -12 % 256 = 244
     writeln(Int8Mul(a, b)); // 85
 
-    bool[8] c = [1,1,0,0,1,0,0,0]; // 19
-    bool[8] d = [0,1,1,0,0,0,0,0]; // 6
-    writeln(Int8Add(c, d)); // 25
-    writeln(Int8Mul(c, d)); // 114
-
-    bool[8] e = [1,0,1,0,0,1,0,0]; // 37
-    bool[8] f = [0,1,0,1,0,0,0,0]; // 10
-    writeln(Int8Add(e, f)); // 47
-    writeln(Int8Mul(e, f)); // 370 % 256 = 114
+    bool[8] c = [1,1,0,1,0,1,0,1]; // 171
+    bool[8] d = [0,1,1,0,0,1,0,1]; // 166
+    writeln(Int8Add(c, d)); // 337 % 256 = 81
+    writeln(Int8Sub(c, d)); // 5
+    writeln(Int8Mul(c, d)); // 28386 % 256 = 226
 }
