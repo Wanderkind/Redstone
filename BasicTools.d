@@ -7,7 +7,7 @@ import std.stdio;
 
 
 
-// basic gates are NOT, OR, NOR, AND, NAND, XOR, XNOR, IMPLY, NIMPLY, 
+// basic gates are NOT, OR, NOR, AND, NAND, XOR, XNOR, IMPLY, NIMPLY
 
 bool NOT(bool a){ // 1 variable
     return !a;
@@ -100,7 +100,7 @@ bool[8] Int8Mul(bool[8] a, bool[8] b){
     bool q;
     bool c;
     bool[8] w = Int8Copy(a);
-    bool[8] mul = [0, 0, 0, 0, 0, 0, 0, 0];
+    bool[8] mul = [false, false, false, false, false, false, false, false];
 
     foreach(i;0..8){
         
@@ -128,23 +128,56 @@ bool[8] Int8Mul(bool[8] a, bool[8] b){
     return mul;
 }
 
+// functions for readability, not implemented in game
+
+int Int8ToNum(bool[8] a){
+    
+    int sum = 0;
+    foreach(i;0..8){
+        
+        if(a[i]){
+            sum += 2^^i;
+        }
+    }
+
+    return sum;
+}
+
+bool[8] NumToInt8(int n){
+    
+    bool[8] i8 = [false, false, false, false, false, false, false, false];
+    int k;
+
+    foreach_reverse(i;0..8){
+        
+        k = 2^^i;
+        if(n>=k){
+            
+            i8[i] = true;
+            n -= k;
+        }
+    }
+
+    return i8;
+}
+
 // main
 
 void main(){
 
     // examples
 
-    bool[8] a = [1,0,1,0,0,0,0,0]; // 5
-    bool[8] b = [1,0,0,0,1,0,0,0]; // 17
-    writeln(Int8Add(a, b)); // 22
-    writeln(Int8Sub(a, b)); // -12 % 256 = 244
-    writeln(Int8Mul(a, b)); // 85
+    bool[8] a = NumToInt8(5);
+    bool[8] b = NumToInt8(17);
+    writeln( Int8ToNum( Int8Add( a, b))); // 22
+    writeln( Int8ToNum( Int8Sub( a, b))); // -12 % 256 = 244
+    writeln( Int8ToNum( Int8Mul( a, b))); // 85
 
-    bool[8] c = [1,1,0,1,0,1,0,1]; // 171
-    bool[8] d = [0,1,1,0,0,1,0,1]; // 166
-    writeln(Int8Add(c, d)); // 337 % 256 = 81
-    writeln(Int8Sub(c, d)); // 5
-    writeln(Int8Mul(c, d)); // 28386 % 256 = 226
+    bool[8] c = NumToInt8(171);
+    bool[8] d = NumToInt8(166);
+    writeln( Int8ToNum( Int8Add( c, d))); // 337 % 256 = 81
+    writeln( Int8ToNum( Int8Sub( c, d))); // 5
+    writeln( Int8ToNum( Int8Mul( c, d))); // 28386 % 256 = 226
 }
 
 // for python:  f=lambda x:bin(x%256)[2:].zfill(8)[::-1]
