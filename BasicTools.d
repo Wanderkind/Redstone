@@ -192,7 +192,7 @@ void main(){
     bool[8] P = Int8Add(c, d);
     bool[8] Q = Int8Sub(c, d);
     bool[8] R = Int8Mul(c, d);
-    writeln(Int8ToNum(P), BoolTo01(R)); // 337 % 256 = 81
+    writeln(Int8ToNum(P), BoolTo01(P)); // 337 % 256 = 81
     writeln(Int8ToNum(Q), BoolTo01(Q)); // 5
     writeln(Int8ToNum(R), BoolTo01(R)); // 28386 % 256 = 226
 }
