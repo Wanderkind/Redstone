@@ -41,7 +41,7 @@ bool IMPLY(bool a, bool b){ // noncommutative, make sure torch signal does not b
     return !(a&!b);
 }
 
-bool NIMPLY(bool a, bool b){ // noncommutative make sure torch signal does not backflow
+bool NIMPLY(bool a, bool b){ // noncommutative, make sure torch signal does not backflow
     return a&!b;
 }
 
