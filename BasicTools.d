@@ -7,7 +7,7 @@ import std.stdio;
 
 
 
-// basic gates are NOT, OR, NOR, AND, NAND, XOR, XNOR, IMPLY
+// basic gates are NOT, OR, NOR, AND, NAND, XOR, XNOR, IMPLY, NIMPLY, 
 
 bool NOT(bool a){ // 1 variable
     return !a;
@@ -37,8 +37,12 @@ bool XNOR(bool a, bool b){
     return !(a^b);
 }
 
-bool IMPLY(bool a, bool b){ // noncommutative
+bool IMPLY(bool a, bool b){ // noncommutative, make sure torch signal does not backflow
     return !(a&!b);
+}
+
+bool NIMPLY(bool a, bool b){ // noncommutative make sure torch signal does not backflow
+    return a&!b;
 }
 
 // basic functions
@@ -81,7 +85,7 @@ bool[8] Int8Sub(bool[8] a, bool[8] b){
         
         q = XOR(k, b[i]);
         p = NAND(k, b[i]);
-        c = NOT(IMPLY(q, a[i]));
+        c = NIMPLY(q, a[i]);
         sub[i] = XOR(a[i], q);
         k = OR(c, p);
     }
