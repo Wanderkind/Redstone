@@ -151,7 +151,7 @@ bool[8] NumToInt8(int n){
     foreach_reverse(i;0..8){
         
         k = 2^^i;
-        if(n>=k){
+        if(n >= k){
             
             i8[i] = true;
             n -= k;
@@ -159,6 +159,17 @@ bool[8] NumToInt8(int n){
     }
 
     return i8;
+}
+
+int[8] BoolTo01(bool[8] a){
+    
+    int[8] eight;
+
+    foreach(i;0..8){
+        eight[i] = (a[i]?1:0);
+    }
+
+    return eight;
 }
 
 // main
@@ -169,15 +180,21 @@ void main(){
 
     bool[8] a = NumToInt8(5);
     bool[8] b = NumToInt8(17);
-    writeln( Int8ToNum( Int8Add( a, b))); // 22
-    writeln( Int8ToNum( Int8Sub( a, b))); // -12 % 256 = 244
-    writeln( Int8ToNum( Int8Mul( a, b))); // 85
+    bool[8] p = Int8Add(a, b);
+    bool[8] q = Int8Sub(a, b);
+    bool[8] r = Int8Mul(a, b);
+    writeln(Int8ToNum(p), BoolTo01(p)); // 22
+    writeln(Int8ToNum(q), BoolTo01(q)); // -12 % 256 = 244
+    writeln(Int8ToNum(r), BoolTo01(r)); // 85
 
     bool[8] c = NumToInt8(171);
     bool[8] d = NumToInt8(166);
-    writeln( Int8ToNum( Int8Add( c, d))); // 337 % 256 = 81
-    writeln( Int8ToNum( Int8Sub( c, d))); // 5
-    writeln( Int8ToNum( Int8Mul( c, d))); // 28386 % 256 = 226
+    bool[8] P = Int8Add(c, d);
+    bool[8] Q = Int8Sub(c, d);
+    bool[8] R = Int8Mul(c, d);
+    writeln(Int8ToNum(P), BoolTo01(R)); // 337 % 256 = 81
+    writeln(Int8ToNum(Q), BoolTo01(Q)); // 5
+    writeln(Int8ToNum(R), BoolTo01(R)); // 28386 % 256 = 226
 }
 
 // for python:  f=lambda x:bin(x%256)[2:].zfill(8)[::-1]
