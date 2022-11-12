@@ -84,7 +84,7 @@ bool[8] Int8Sub(bool[8] a, bool[8] b){
     foreach(i;0..8){
         
         q = XOR(k, b[i]);
-        p = NAND(k, b[i]);
+        p = AND(k, b[i]);
         c = NIMPLY(q, a[i]);
         sub[i] = XOR(a[i], q);
         k = OR(c, p);
