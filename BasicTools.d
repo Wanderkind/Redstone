@@ -67,7 +67,7 @@ bool[8] Int8Add(bool[8] a, bool[8] b){
         p = AND(a[i], b[i]);
         c = AND(k, q);
         sum[i] = XOR(q, k);
-        k = OR(c, p); // XOR also works
+        k = OR(c, p); // XOR also works, OR is preferred
     }
 
     return sum;
@@ -114,7 +114,7 @@ bool[8] Int8Mul(bool[8] a, bool[8] b){
                 p = AND(w[j], mul[j]);
                 c = AND(k, q);
                 mul[j] = XOR(q, k);
-                k = OR(c, p); // XOR also works
+                k = OR(c, p); // XOR also works, OR is preferred
             }
         }
         
@@ -128,7 +128,7 @@ bool[8] Int8Mul(bool[8] a, bool[8] b){
     return mul;
 }
 
-// functions for readability, not implemented in game
+// functions for readability, not for implementation in game
 
 int Int8ToNum(bool[8] a){
     
