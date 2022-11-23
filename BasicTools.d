@@ -13,7 +13,7 @@ bool NOT(bool a){ // 1 variable
     return !a;
 }
 
-bool OR(bool a, bool b){
+bool OR(bool a, bool b){ // always preferred
     return a|b;
 }
 
@@ -67,7 +67,7 @@ bool[8] Int8Add(bool[8] a, bool[8] b){
         p = AND(a[i], b[i]);
         c = AND(k, q);
         sum[i] = XOR(q, k);
-        k = OR(c, p); // XOR also works, OR is preferred
+        k = OR(c, p); // XOR also works
     }
 
     return sum;
@@ -100,7 +100,7 @@ bool[8] Int8Mul(bool[8] a, bool[8] b){
     bool q;
     bool c;
     bool[8] w = Int8Copy(a);
-    bool[8] mul = [false, false, false, false, false, false, false, false];
+    bool[8] mul = false;
 
     foreach(i;0..8){
         
@@ -114,7 +114,7 @@ bool[8] Int8Mul(bool[8] a, bool[8] b){
                 p = AND(w[j], mul[j]);
                 c = AND(k, q);
                 mul[j] = XOR(q, k);
-                k = OR(c, p); // XOR also works, OR is preferred
+                k = OR(c, p); // XOR also works
             }
         }
         
@@ -128,7 +128,7 @@ bool[8] Int8Mul(bool[8] a, bool[8] b){
     return mul;
 }
 
-// functions for readability, not for implementation in game
+// functions for readability, not implemented in game
 
 int Int8ToNum(bool[8] a){
     
@@ -145,7 +145,7 @@ int Int8ToNum(bool[8] a){
 
 bool[8] NumToInt8(int n){
     
-    bool[8] i8 = [false, false, false, false, false, false, false, false];
+    bool[8] i8 = false;
     int k;
 
     foreach_reverse(i;0..8){
