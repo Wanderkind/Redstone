@@ -1,10 +1,13 @@
 
-import std.algorithm;
-import std.conv;
-//import std.numeric;
-import std.range;
 import std.stdio;
-
+//import std.algorithm;
+//import std.math;
+//import std.conv;
+//import std.numeric;
+//import std.range;
+//import std.array;
+//import std.bigint;
+//import std.string;
 
 
 // basic gates are NOT, OR, NOR, AND, NAND, XOR, XNOR, IMPLY, NIMPLY
